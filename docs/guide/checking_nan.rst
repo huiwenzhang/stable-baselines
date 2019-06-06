@@ -4,8 +4,11 @@ Dealing with NaNs and infs
 During the training of a model on a given environment, it is possible that the RL model becomes completely
 corrupted when a NaN or an inf is given or returned from the RL model.
 
-The issue arises then this NaN or inf does not crash, but simply get propagated through the training,
-until all the floating point number converge to  NaN or inf. This is in line with the
+How and why?
+------------
+
+The issue arises then NaNs or infs do not crash, but simply get propagated through the training,
+until all the floating point number converge to NaN or inf. This is in line with the
 `IEEE Standard for Floating-Point Arithmetic (IEEE 754) <https://ieeexplore.ieee.org/document/4610935>`_ standard, as it says:
 
 .. note::
@@ -18,7 +21,7 @@ until all the floating point number converge to  NaN or inf. This is in line wit
         - Underflow (exponent too low to represent) returns :math:`0`
         - Inexact (not representable exactly in base 2, eg: :math:`1/5`) returns the rounded value (ex: :code:`assert (1/5) * 3 == 0.6000000000000001`)
 
-And of these, only ``Division by zero`` will signal an exception, the rest will propagate quietly.
+And of these, only ``Division by zero`` will signal an exception, the rest will propagate invalid values quietly.
 
 In python, dividing by zero will indeed raise the exception: ``ZeroDivisionError: float division by zero``,
 but ignores the rest.

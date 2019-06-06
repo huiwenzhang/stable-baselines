@@ -14,7 +14,8 @@ class NanAndInfEnv(gym.Env):
         self.action_space = spaces.Box(low=-np.inf, high=np.inf, shape=(1,), dtype=np.float64)
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(1,), dtype=np.float64)
 
-    def step(self, action):
+    @staticmethod
+    def step(self):
         if all(action > 0):
             obs = float('NaN')
         elif all(action < 0):
@@ -23,7 +24,8 @@ class NanAndInfEnv(gym.Env):
             obs = 0
         return [obs], 0.0, False, {}
 
-    def reset(self):
+    @staticmethod
+    def reset():
         return [0.0]
 
     def render(self, mode='human', close=False):
