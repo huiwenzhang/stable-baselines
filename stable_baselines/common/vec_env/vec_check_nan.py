@@ -29,19 +29,19 @@ class VecCheckNan(VecEnvWrapper):
         self._check_val(async_step=True, actions=actions)
 
         self._actions = actions
-        self.venv.step_wait(actions)
+        self.venv.step_async(actions)
 
     def step_wait(self):
         observations, rewards, news, infos = self.venv.step_wait()
 
-        self._check_val(async_step=False, observations=observations, rewards=rewards, news=news, infos=infos)
+        self._check_val(async_step=False, observations=observations, rewards=rewards, news=news)
 
         self._observations = observations
         return observations, rewards, news, infos
 
     def reset(self):
         observations = self.venv.reset()
-        self._actions = "reset, no first action"
+        self._actions = None
 
         self._check_val(async_step=False, observations=observations)
 
@@ -53,7 +53,7 @@ class VecCheckNan(VecEnvWrapper):
             return
 
         found = []
-        for name, val in kwargs:
+        for name, val in kwargs.items():
             has_nan = any(np.isnan(val))
             has_inf = self.check_inf and any(np.isinf(val))
             if has_inf:
@@ -65,16 +65,19 @@ class VecCheckNan(VecEnvWrapper):
             self._user_warned = True
             msg = ""
             for i, (name, type_val) in enumerate(found):
-                msg +=  "found {} in {}".format(name, type_val)
+                msg +=  "found {} in {}".format(type_val, name)
                 if i != len(found) - 1:
                     msg += ", "
 
-            msg += ". Last given value was: "
+            msg += ".\r\nOriginated from the "
 
-            if async_step:
-                msg += "action={}".format(self._action)
+            if not async_step:
+                if self._actions is None:
+                    msg += "environment observation (at reset)"
+                else:
+                    msg += "environment, Last given value was: \r\n\taction={}".format(self._actions)
             else:
-                msg += "observations={}".format(self._observations)
+                msg += "RL model, Last given value was: \r\n\tobservations={}".format(self._observations)
 
             if self.raise_exception:
                 raise ValueError(msg)
