@@ -69,3 +69,10 @@ VecVideoRecorder
 
 .. autoclass:: VecVideoRecorder
   :members:
+
+
+VecCheckNan
+~~~~~~~~~~~~~~~~
+
+.. autoclass:: VecCheckNan
+  :members:
