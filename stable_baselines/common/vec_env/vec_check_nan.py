@@ -65,7 +65,7 @@ class VecCheckNan(VecEnvWrapper):
             self._user_warned = True
             msg = ""
             for i, (name, type_val) in enumerate(found):
-                msg +=  "found {} in {}".format(type_val, name)
+                msg += "found {} in {}".format(type_val, name)
                 if i != len(found) - 1:
                     msg += ", "
 

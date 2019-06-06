@@ -9,11 +9,10 @@ class NanAndInfEnv(gym.Env):
     """Custom Environment that raised NaNs and Infs"""
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, raise_nan):
+    def __init__(self):
         super(NanAndInfEnv, self).__init__()
         self.action_space = spaces.Box(low=-np.inf, high=np.inf, shape=(1,), dtype=np.float64)
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(1,), dtype=np.float64)
-        self.raise_nan = raise_nan
 
     def step(self, action):
         if all(action > 0):
@@ -34,7 +33,7 @@ class NanAndInfEnv(gym.Env):
 def test_check_nan():
     """Test VecCheckNan Object"""
 
-    env = DummyVecEnv([lambda: NanAndInfEnv()])
+    env = DummyVecEnv([NanAndInfEnv])
     env = VecCheckNan(env, raise_exception=True)
 
     env.step([[0]])
@@ -66,3 +65,4 @@ def test_check_nan():
         pass
     else:
         assert False
+

@@ -107,7 +107,7 @@ but will not avoid the propagation issues:
 
   a = np.float64('NaN')
   b = np.float64(1.0)
-  val = a + b  # this will warn and raise say nothing
+  val = a + b  # this will neither warn nor raise anything
   print(val)
 
 
