@@ -15,7 +15,7 @@ class NanAndInfEnv(gym.Env):
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(1,), dtype=np.float64)
 
     @staticmethod
-    def step(self):
+    def step(action):
         if all(action > 0):
             obs = float('NaN')
         elif all(action < 0):
