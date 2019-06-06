@@ -16,9 +16,9 @@ class NanAndInfEnv(gym.Env):
 
     @staticmethod
     def step(action):
-        if all(action > 0):
+        if all(np.array(action) > 0):
             obs = float('NaN')
-        elif all(action < 0):
+        elif all(np.array(action) < 0):
             obs = float('inf')
         else:
             obs = 0
