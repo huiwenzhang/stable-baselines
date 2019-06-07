@@ -173,7 +173,7 @@ A great example of this: https://github.com/hill-a/stable-baselines/issues/340
 
 Be aware, the hyperparameters given by default seem to work in most cases,
 however your environment might not play nice with the default hyperparameters.
-If this is the case, try to read up on the affect each hyperparameters has on the model,
+If this is the case, try to read up on the effect each hyperparameters has on the model,
 so that you can try and tune them to get a stable model.
 
 Missing values from datasets
