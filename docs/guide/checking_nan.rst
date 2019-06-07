@@ -67,7 +67,7 @@ And the worst of all, Tensorflow will not signal anything
 Numpy parameters
 ----------------
 
-Numpy has a convenient ways of dealing with invalid value: `numpy.seterr <https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterr.html>`_,
+Numpy has a convenient way of dealing with invalid value: `numpy.seterr <https://docs.scipy.org/doc/numpy/reference/generated/numpy.seterr.html>`_,
 which defines for the python process, how it should handle floating point error.
 
 .. code-block:: python
