@@ -61,7 +61,7 @@ And the worst of all, Tensorflow will not signal anything
   val = a / b  # this will raise an exception and halt.
   print(val)
 
- Unfortunalty, most of the floating point operations are handled by Tensorflow and numpy,
+ Unfortunately, most of the floating point operations are handled by Tensorflow and numpy,
  meaning you might get little to no warning when a invalid value occurs.
 
 Numpy parameters
