@@ -117,7 +117,7 @@ but will not avoid the propagation issues:
 VecCheckNan Wrapper
 -------------------
 
-In order to find when and from where the invalid value originated from, Stable-baselines comes with a ``VecCheckNan`` wrapper.
+In order to find when and from where the invalid value originated from, stable-baselines comes with a ``VecCheckNan`` wrapper.
 
 It will monitor the actions, observations, and rewards, indicating what action or observation caused it and from what.
 
