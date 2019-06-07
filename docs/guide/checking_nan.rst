@@ -179,7 +179,7 @@ so that you can try and tune them to get a stable model. Alternatively, you can 
 Missing values from datasets
 ----------------------------
 
-If your environment is generated from an external dataset, do not forget to make sure you datasets do not contain NaNs.
+If your environment is generated from an external dataset, do not forget to make sure your dataset does not contain NaNs.
 As some datasets will sometimes fill missing values with NaNs as a surrogate value.
 
 Here is some reading material about finding NaNs: https://pandas.pydata.org/pandas-docs/stable/user_guide/missing_data.html
