@@ -174,7 +174,7 @@ A great example of this: https://github.com/hill-a/stable-baselines/issues/340
 Be aware, the hyperparameters given by default seem to work in most cases,
 however your environment might not play nice with them.
 If this is the case, try to read up on the effect each hyperparameters has on the model,
-so that you can try and tune them to get a stable model.
+so that you can try and tune them to get a stable model. Alternatively, you can try automatic hyperparameter tuning (included in the rl zoo).
 
 Missing values from datasets
 ----------------------------
