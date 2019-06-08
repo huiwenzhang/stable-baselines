@@ -425,7 +425,9 @@ class DDPG(OffPolicyRLModel):
                     tf.summary.scalar('actor_loss', self.actor_loss)
                     tf.summary.scalar('critic_loss', self.critic_loss)
 
-                self.params = tf_util.get_trainable_vars("model")
+                self.params = tf_util.get_trainable_vars("model") \
+                    + tf_util.get_trainable_vars('noise/') + tf_util.get_trainable_vars('noise_adapt/')
+
                 self.target_params = tf_util.get_trainable_vars("target")
                 self.obs_rms_params = [var for var in tf.global_variables()
                                        if "obs_rms" in var.name]
@@ -1106,7 +1108,21 @@ class DDPG(OffPolicyRLModel):
         model.__dict__.update(kwargs)
         model.set_env(env)
         model.setup_model()
-
+        # Patch for version < v2.6.0, duplicated keys where saved
+        if len(params) > len(model.get_parameter_list()):
+            n_params = len(model.params)
+            n_target_params = len(model.target_params)
+            n_normalisation_params = len(model.obs_rms_params) + len(model.ret_rms_params)
+            # Check that the issue is the one from
+            # https://github.com/hill-a/stable-baselines/issues/363
+            assert len(params) == 2 * (n_params + n_target_params) + n_normalisation_params,\
+                "The number of parameter saved differs from the number of parameters"\
+                " that should be loaded: {}!={}".format(len(params), len(model.get_parameter_list()))
+            # Remove duplicates
+            params_ = params[:n_params + n_target_params]
+            if n_normalisation_params > 0:
+                 params_ += params[-n_normalisation_params:]
+            params = params_
         model.load_parameters(params)
 
         return model
