@@ -1121,7 +1121,7 @@ class DDPG(OffPolicyRLModel):
             # Remove duplicates
             params_ = params[:n_params + n_target_params]
             if n_normalisation_params > 0:
-                 params_ += params[-n_normalisation_params:]
+                params_ += params[-n_normalisation_params:]
             params = params_
         model.load_parameters(params)
 
