@@ -29,6 +29,8 @@ Pre-Release 2.6.0a0 (WIP)
 - **important change** switched to using dictionaries rather than lists when storing parameters, with tensorflow Variable names being the keys. (@Miffyli)
 - added specific hyperparameter for PPO2 to clip the value function (``cliprange_vf``)
 - fixed ``num_timesteps`` (total_timesteps) variable in PPO2 that was wrongly computed.
+- fixed a bug in DDPG/DQN/SAC, when there were the number of samples in the replay buffer was lesser than the batch size
+  (thanks to @dwiel for spotting the bug)
 - **removed** ``a2c.utils.find_trainable_params`` please use ``common.tf_util.get_trainable_vars`` instead.
   ``find_trainable_params`` was returning all trainable variables, discarding the scope argument.
   This bug was causing the model to save duplicated parameters (for DDPG and SAC)
@@ -346,4 +348,4 @@ In random order...
 Thanks to @bjmuld @iambenzo @iandanforth @r7vme @brendenpetersen @huvar @abhiskk @JohannesAck
 @EliasHasle @mrakgr @Bleyddyn @antoine-galataud @junhyeokahn @AdamGleave @keshaviyengar @tperol
 @XMaster96 @kantneel @Pastafarianist @GerardMaggiolino @PatrickWalter214 @yutingsz @sc420 @Aaahh @billtubbs
-@Miffyli
+@Miffyli @dwiel
