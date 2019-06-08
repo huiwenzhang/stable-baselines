@@ -17,7 +17,7 @@ from stable_baselines.common.vec_env import VecEnv
 from stable_baselines.common.mpi_adam import MpiAdam
 from stable_baselines.ddpg.policies import DDPGPolicy
 from stable_baselines.common.mpi_running_mean_std import RunningMeanStd
-from stable_baselines.a2c.utils import find_trainable_variables, total_episode_reward_logger
+from stable_baselines.a2c.utils import total_episode_reward_logger
 from stable_baselines.deepq.replay_buffer import ReplayBuffer
 
 
@@ -425,8 +425,8 @@ class DDPG(OffPolicyRLModel):
                     tf.summary.scalar('actor_loss', self.actor_loss)
                     tf.summary.scalar('critic_loss', self.critic_loss)
 
-                self.params = find_trainable_variables("model")
-                self.target_params = find_trainable_variables("target")
+                self.params = tf_util.get_trainable_vars("model")
+                self.target_params = tf_util.get_trainable_vars("target")
                 self.obs_rms_params = [var for var in tf.global_variables()
                                        if "obs_rms" in var.name]
                 self.ret_rms_params = [var for var in tf.global_variables()
